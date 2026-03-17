@@ -151,9 +151,6 @@ export async function POST(req: Request) {
 
     const apiKey = process.env.GEMINI_API_KEY
 
-    console.log("API Key exists:", !!apiKey)
-    console.log("API Key length:", apiKey?.length || 0)
-
     if (!apiKey) {
       return NextResponse.json(
         { error: "Falta configurar GEMINI_API_KEY en el entorno del servidor." },
@@ -173,7 +170,7 @@ export async function POST(req: Request) {
     ]
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + encodeURIComponent(apiKey),
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + encodeURIComponent(apiKey),
 
       {
         method: "POST",
