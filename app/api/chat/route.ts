@@ -151,6 +151,9 @@ export async function POST(req: Request) {
 
     const apiKey = process.env.GEMINI_API_KEY
 
+    console.log("API Key exists:", !!apiKey)
+    console.log("API Key length:", apiKey?.length || 0)
+
     if (!apiKey) {
       return NextResponse.json(
         { error: "Falta configurar GEMINI_API_KEY en el entorno del servidor." },
