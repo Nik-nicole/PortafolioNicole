@@ -162,7 +162,7 @@ const baseProjects = [
     key: "sol",
     image: "/Sol.png",
     technologies: ["Python", "TensorFlow", "YOLO", "OpenCV","mediapipe", "pandas"],
-    video: "/solmodelo.mp4",
+    video: "https://res.cloudinary.com/dskirb7an/video/upload/v1773774458/grabacion-de-pantalla-2025-03-09-113900_heOBVWsp_flapay.mp4",
     gallery: ["/Sol.png", "/YOLOAI.png", "/AIprueba.png", "/ToolsAI.png"],
     github: "https://github.com/Nik-nicole/AISol",
   },
@@ -180,7 +180,7 @@ const baseProjects = [
     key: "dashboard",
     image: "/data-dashboard.jpg",
     technologies: ["JavaScript", "AppsScript", "SQL", "Google Sheets API", "AI"],
-    video: "/Fundacion.mp4",
+    video: "https://res.cloudinary.com/dskirb7an/video/upload/v1773774448/focusee-project-2025-07-09-23-17-19_yUA2Aw3O_rbtx7n.mp4",
     gallery: ["/dashboard-1.jpg", "/dashboard-2.jpg", "/dashboard-3.jpg", "/dashboard-4.jpg"],
   },
   {
