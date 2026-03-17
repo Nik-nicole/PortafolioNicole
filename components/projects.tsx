@@ -160,10 +160,10 @@ const baseProjects = [
   {
     id: 1,
     key: "sol",
-    image: "/sol.png",
+    image: "/Sol.png",
     technologies: ["Python", "TensorFlow", "YOLO", "OpenCV","mediapipe", "pandas"],
-    video: "solmodelo.mp4",
-    gallery: ["/sol.png", "/YOLOAi.png", "/AIprueba.png", "/ToolsAI.png"],
+    video: "/solmodelo.mp4",
+    gallery: ["/Sol.png", "/YOLOAI.png", "/AIprueba.png", "/ToolsAI.png"],
     github: "https://github.com/Nik-nicole/AISol",
   },
   {
@@ -180,7 +180,7 @@ const baseProjects = [
     key: "dashboard",
     image: "/data-dashboard.jpg",
     technologies: ["JavaScript", "AppsScript", "SQL", "Google Sheets API", "AI"],
-    video: "/Fundación.mp4",
+    video: "/Fundacion.mp4",
     gallery: ["/dashboard-1.jpg", "/dashboard-2.jpg", "/dashboard-3.jpg", "/dashboard-4.jpg"],
   },
   {
