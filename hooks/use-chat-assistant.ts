@@ -94,7 +94,29 @@ export function useChatAssistant(): UseChatAssistantResult {
       })
 
       if (!res.ok) {
-        throw new Error("Error al comunicarse con el asistente IA")
+        const errorText = await res.text()
+        console.error("API Error:", errorText)
+        
+        // Fallback responses when API fails
+        const fallbackResponses = [
+          "Por ahora mi asistente de IA no está disponible, pero puedo decirte que soy una desarrolladora apasionada con experiencia en IA, visión por computador y desarrollo web. ¿En qué puedo ayudarte?",
+          "Mi asistente de IA está temporalmente fuera de servicio. Soy Nicole, desarrolladora colombiana de 19 años, especializada en IA con visión por computador. ¿Qué te gustaría saber sobre mis proyectos?",
+          "El asistente de IA no responde en este momento. Soy Nicole, Técnico y Tecnólogo en Software del SENA, con experiencia en proyectos reales de IA y desarrollo web. ¿En qué te puedo apoyar?"
+        ]
+        
+        const randomFallback = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
+        
+        const aiMessage: ChatMessage = {
+          id: Date.now().toString(),
+          content: randomFallback,
+          sender: "ai",
+          timestamp: new Date(),
+        }
+        
+        setMessages(prev => [...prev, aiMessage])
+        setInputValue("")
+        setIsLoading(false)
+        return
       }
 
       const data = await res.json()

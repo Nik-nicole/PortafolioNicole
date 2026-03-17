@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { HfInference } from "@huggingface/inference"
 
 const SYSTEM_PROMPT = `Eres un modelo de IA diseñado para responder como Nicole Paez, basada únicamente en la información real entregada en este contexto.
 No inventas logros, proyectos ni fechas. No generas información genérica ni alucinada.
@@ -149,54 +150,44 @@ export async function POST(req: Request) {
       )
     }
 
-    const apiKey = process.env.GEMINI_API_KEY
+    const hfToken = process.env.HUGGINGFACE_API_KEY
 
-    if (!apiKey) {
+    if (!hfToken) {
       return NextResponse.json(
-        { error: "Falta configurar GEMINI_API_KEY en el entorno del servidor." },
+        { error: "Falta configurar HUGGINGFACE_API_KEY en el entorno del servidor." },
         { status: 500 },
       )
     }
 
-    const geminiMessages = [
-      {
-        role: "user",
-        parts: [{ text: SYSTEM_PROMPT }],
-      },
-      ...messages.map((m) => ({
-        role: m.role === "assistant" ? "model" : "user",
-        parts: [{ text: m.content }],
-      })),
-    ]
+    const hf = new HfInference(hfToken)
+    
+    // Preparar el contexto para el modelo
+    const context = `${SYSTEM_PROMPT}\n\nConversación anterior:\n${messages.map(m => `${m.role}: ${m.content}`).join('\n')}\n\nUsuario: ${messages[messages.length - 1]?.content || ''}`
 
-    const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + encodeURIComponent(apiKey),
+    try {
+      const response = await hf.textGeneration({
+        model: "microsoft/DialoGPT-medium",
+        inputs: context,
+        parameters: {
+          max_new_tokens: 500,
+          temperature: 0.7,
+          do_sample: true,
+          top_p: 0.9,
+          return_full_text: false,
+        }
+      })
 
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: geminiMessages,
-        }),
-      },
-    )
+      const text = (response as any)?.[0]?.generated_text?.trim() || 
+        "Soy Nicole Paez, desarrolladora de software con experiencia en IA y visión por computador. ¿En qué puedo ayudarte con mi portafolio?"
 
-    if (!response.ok) {
-      console.error("Error al llamar a Gemini:", await response.text())
+      return NextResponse.json({ response: text })
+    } catch (error) {
+      console.error("Error al llamar a Hugging Face:", error)
       return NextResponse.json(
-        { error: "Error al generar la respuesta con Gemini." },
+        { error: "Error al generar la respuesta con Hugging Face." },
         { status: 500 },
       )
     }
-
-    const data = (await response.json()) as any
-    const text =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "Por ahora no pude generar una respuesta, pero puedes preguntarme sobre mi experiencia, proyectos o habilidades técnicas."
-
-    return NextResponse.json({ response: text })
   } catch (error) {
     console.error("Error en la API de chat:", error)
     return NextResponse.json(
