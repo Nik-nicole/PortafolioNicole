@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Download, Linkedin, Github } from "lucide-react"
 import { useEffect, useRef } from "react"
 import { useThemeLanguage } from "@/components/theme-language-provider"
+import { CVDownloadDialog } from "@/components/cv-download-dialog"
 
 const translations = {
   es: {
@@ -192,16 +193,7 @@ export default function Hero() {
             </p>
 
             <div className="flex items-center gap-4">
-              <Button
-                asChild
-                variant="outline"
-                className="border-pink-500 text-pink-500 hover:bg-pink-50 dark:hover:bg-pink-500/10 px-6 py-2 rounded-full"
-              >
-                <a href="/CV-NicolePaezVasquez2026.pdf" download>
-                  {t.downloadCV}
-                  <Download className="ml-2 h-5 w-5"/>
-                </a>
-              </Button>
+              <CVDownloadDialog />
 
               <a
                 href="https://www.linkedin.com/in/nicole-paez-dev"
