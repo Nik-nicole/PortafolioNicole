@@ -48,6 +48,17 @@ const translations = {
           "Sistema de recomendaciones basado en feedback",
         ]
       },
+      skate: {
+        title: "CONCAVE",
+        description: "Desarrollé la tienda en línea de mi marca de skate, CONCAVE, enfocada en vender tablas personalizadas con diseño único, donde el cliente puede personalizar la madera, elegir su modelo y recibirlo en casa con una experiencia premium.",
+        achievements: [
+          "Integración de pasarela de pago con Bold",
+          "Gestión de inventario y stock de productos",
+          "Optimización de performance para carga 3D y experiencia fluida",
+          "Manejo de estados de pago con webhooks y pruebas de validación",
+          "Diseño de tienda premium para marca de skate",
+        ]
+      },
       mobile: {
         title: "Sistema de Administración Gym",
         description: "Desarrollé un sistema integral de software para la administración completa de gimnasios, diseñado para optimizar la gestión operativa y mejorar la experiencia del cliente.",
@@ -112,6 +123,17 @@ const translations = {
           "Real-time NPS and INS calculation",
           "AI-powered sentiment analysis for open comments",
           "Feedback-based recommendation system",
+        ]
+      },
+      skate: {
+        title: "CONCAVE",
+        description: "I developed the online store for my skate brand, CONCAVE, focused on selling custom boards with unique designs, where customers can personalize the wood, choose their model, and receive it at home through a premium shopping experience.",
+        achievements: [
+          "Payment gateway integration with Bold",
+          "Inventory and stock management",
+          "Performance optimization for smooth 3D loading and UX",
+          "Payment state handling with webhooks and validation testing",
+          "Premium storefront design for a skate brand",
         ]
       },
       mobile: {
@@ -199,6 +221,20 @@ const baseProjects = [
     technologies: ["React", "TypeScript", "JWT", "Java Spring Boot", "PostgreSQL", "Postman"],
     gallery: ["/GestorEmpresarial2.png", "/GestorEmpresarial3.png", "/GestorEmpresarial4.png", "/GestorEmpresarial5.png"],
     github: ["https://github.com/Nik-nicole/IkellFront", "https://github.com/Nik-nicole/Ikernell"],
+  },
+  {
+    id: 6,
+    key: "skate",
+    image: "/Skate1.png",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    gallery: [
+      "/Skate2.png",
+      "/Sakte3.png",
+      "/Skate4.png",
+      "/Skate5.png",
+      "SKATE6.png",
+    ],
+    demo: "https://concaveskate.vercel.app/",
   },
 ]
 

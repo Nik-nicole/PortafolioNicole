@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server"
 import { InferenceClient } from "@huggingface/inference"
 
-// ✅ InferenceClient es el nuevo SDK (reemplaza HfInference)
-const client = new InferenceClient(process.env.HUGGINGFACE_API_KEY)
+const HUGGINGFACE_API_KEY = process.env.HUGGINGFACE_API_KEY?.trim()
+const client = HUGGINGFACE_API_KEY ? new InferenceClient(HUGGINGFACE_API_KEY) : null
+
+const OFFLINE_RESPONSE = `Este asistente está en modo profesional y no está disponible en este momento.
+
+Puedes seguir consultando mi perfil técnico y experiencia en esta web. Si quieres contactarme, usa el botón de contacto disponible en la interfaz.`
 
 type ChatMessage = {
   role: "user" | "assistant" | "system"
@@ -20,7 +24,23 @@ const isContactRequest = (msg: string) =>
     msg.toLowerCase().includes(k)
   )
 
-const SYSTEM_PROMPT = `Eres Nicole Paez, una desarrolladora colombiana de 19 años. Respondes en primera persona, como si fueras ella misma hablando con un reclutador o persona técnica.
+const BIRTH_DATE = new Date("2006-08-22T00:00:00-05:00")
+
+const getAge = () => {
+  const today = new Date()
+  let age = today.getFullYear() - BIRTH_DATE.getFullYear()
+  const hasBirthdayPassedThisYear =
+    today.getMonth() > BIRTH_DATE.getMonth() ||
+    (today.getMonth() === BIRTH_DATE.getMonth() && today.getDate() >= BIRTH_DATE.getDate())
+
+  if (!hasBirthdayPassedThisYear) {
+    age -= 1
+  }
+
+  return age
+}
+
+const SYSTEM_PROMPT = () => `Eres Nicole Paez, una desarrolladora colombiana de ${getAge()} años. Respondes en primera persona, como si fueras ella misma hablando con un reclutador o persona técnica.
 
 Tu personalidad: directa, profesional pero cercana, apasionada por aprender, explicas con claridad y entusiasmo.
 
@@ -75,6 +95,10 @@ const MODELS = [
 ]
 
 async function callModel(modelId: string, messages: { role: "system" | "user" | "assistant"; content: string }[]) {
+  if (!client) {
+    throw new Error("HUGGINGFACE_API_KEY no configurada")
+  }
+
   const response = await client.chatCompletion({
     model: modelId,
     messages,
@@ -97,13 +121,17 @@ export async function POST(req: Request) {
 
     const userMessage = messages[messages.length - 1]?.content || ""
 
+    if (!HUGGINGFACE_API_KEY) {
+      return NextResponse.json({ response: OFFLINE_RESPONSE })
+    }
+
     // Filtro duro para solicitudes de contacto
     if (isContactRequest(userMessage)) {
       return NextResponse.json({ response: CONTACT_RESPONSE })
     }
 
     const chatMessages = [
-      { role: "system" as const, content: SYSTEM_PROMPT },
+      { role: "system" as const, content: SYSTEM_PROMPT() },
       ...messages.slice(-6).map((m) => ({
         role: m.role as "user" | "assistant",
         content: m.content,

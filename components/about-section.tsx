@@ -30,7 +30,7 @@ const translations = {
     title: "Who am I?",
     subtitle: "A young developer with big dreams and solid technical skills",
     passionate: "Passionate Developer",
-    about1: "At just 19 years old, I'm a full-stack developer passionate with a particular interest in artificial intelligence and creating meaningful technological solutions.",
+    about1: "I'm a full-stack developer passionate about artificial intelligence and creating meaningful technological solutions.",
     about2: "I'm a Full-Stack developer with over 2 years of experience creating technological solutions focused on optimizing processes and improving productivity. I've developed my own projects ranging from management systems and data analysis dashboards to applications with artificial intelligence, using technologies like React, Vite, Spring Boot, and Python.",
     about3: "I stand out for building complete, secure, and scalable applications, and for my human approach: I enjoy understanding the business layer to provide more strategic solutions. I've strengthened my skills in hackathons where I learned to identify opportunities and work under pressure, and I value teamwork as a constant opportunity for learning and joint growth.",
     skills: {
