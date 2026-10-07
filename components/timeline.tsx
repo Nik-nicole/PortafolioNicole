@@ -15,19 +15,14 @@ const translations = {
     achievement: "Logros",
     events: [
       {
+        title: "Ingeniería de Software (Politécnico Gran Colombiano, 6to semestre)",
+        date: "2026 - 2027",
+        description: "Actualmente estoy cursando Ingeniería de Software en el Politécnico Gran Colombiano, en sexto semestre, y me gradúo en 2027.",
+      },
+      {
         title: "Fundación Bolívar Davivienda",
         date: "2025",
         description: "Ayudé a desarrollar un sistema con IA para el manejo de formularios de satisfacción y KPIs, generando sugerencias para mejoras.",
-      },
-      {
-        title: "Software Factory (SENA)",
-        date: "2024",
-        description: "Trabajé en proyectos reales, incluyendo SOL: reconocimiento de señas con visión por computador usando Python.",
-      },
-      {
-        title: "Hackathon MinTIC (3er puesto)",
-        date: "2024",
-        description: "Gané el 3er puesto con un videojuego en pixel art que enseñaba ciberseguridad a personas comunes para prevenir ataques frecuentes (JavaScript).",
       },
       {
         title: "Senasoft (3er puesto)",
@@ -35,9 +30,19 @@ const translations = {
         description: "Gané el 3er puesto con un proyecto para reutilizar comida próxima a vencerse: fundaciones podían recibir donaciones, empresas reducían impuestos y las personas obtenían bonos al comprar.",
       },
       {
-        title: "Educación Técnica en Desarrollo de Software",
-        date: "2020 - 2023",
-        description: "Completé educación técnica en desarrollo de software con enfoque en tecnologías full-stack y aplicaciones de IA.",
+        title: "Hackathon MinTIC (3er puesto)",
+        date: "2024",
+        description: "Gané el 3er puesto con un videojuego en pixel art que enseñaba ciberseguridad a personas comunes para prevenir ataques frecuentes (JavaScript).",
+      },
+      {
+        title: "Software Factory (SENA)",
+        date: "2024",
+        description: "Trabajé en proyectos reales, incluyendo SOL: reconocimiento de señas con visión por computador usando Python.",
+      },
+      {
+        title: "Tecnólogo en Análisis y Desarrollo de Software",
+        date: "2024 - 2026",
+        description: "Completé mi tecnólogo en Análisis y Desarrollo de Software y luego homologué mi formación para continuar con Ingeniería de Software.",
       },
     ]
   },
@@ -49,19 +54,14 @@ const translations = {
     achievement: "Achievements",
     events: [
       {
+        title: "Software Engineering (Politécnico Gran Colombiano, 6th semester)",
+        date: "2026 - 2027",
+        description: "I am currently studying Software Engineering at Politécnico Gran Colombiano in my sixth semester and I expect to graduate in 2027.",
+      },
+      {
         title: "Fundación Bolívar Davivienda",
         date: "2025",
         description: "I helped develop an AI system for managing satisfaction forms and KPIs, generating suggestions for improvements.",
-      },
-      {
-        title: "Software Factory (SENA)",
-        date: "2024",
-        description: "I worked on real projects, including SOL: sign language recognition with computer vision using Python.",
-      },
-      {
-        title: "MinTIC Hackathon (3rd place)",
-        date: "2024",
-        description: "I won 3rd place with a pixel art video game that taught cybersecurity to ordinary people to prevent frequent attacks (JavaScript).",
       },
       {
         title: "Senasoft (3rd place)",
@@ -69,9 +69,19 @@ const translations = {
         description: "I won 3rd place with a project to reuse food about to expire: foundations could receive donations, companies reduced taxes, and people got vouchers when purchasing.",
       },
       {
-        title: "Technical Education in Software Development",
-        date: "2020 - 2023",
-        description: "I completed technical education in software development with a focus on full-stack technologies and AI applications.",
+        title: "MinTIC Hackathon (3rd place)",
+        date: "2024",
+        description: "I won 3rd place with a pixel art video game that taught cybersecurity to ordinary people to prevent frequent attacks (JavaScript).",
+      },
+      {
+        title: "Software Factory (SENA)",
+        date: "2024",
+        description: "I worked on real projects, including SOL: sign language recognition with computer vision using Python.",
+      },
+      {
+        title: "Technologist in Software Analysis and Development",
+        date: "2024 - 2026",
+        description: "I completed my technologist program in Software Analysis and Development and then homologated my training to continue with Software Engineering.",
       },
     ]
   }
@@ -112,6 +122,11 @@ const baseEvents = [
     icon: <Calendar className="h-5 w-5" />,
     category: "education" as const,
   },
+  {
+    id: 6,
+    icon: <Calendar className="h-5 w-5" />,
+    category: "education" as const,
+  },
 ]
 
 export default function Timeline() {
@@ -134,9 +149,9 @@ export default function Timeline() {
   const timelineEvents = getTranslatedEvents()
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-slate-900 transition-colors" id="timeline">
+    <section className="py-20 md:py-28 pb-24 md:pb-32 bg-gray-50 dark:bg-slate-900 transition-colors" id="timeline">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 md:mb-20">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-black dark:text-white">
             <>
               <span>{t.title.split(' y ')[0]} y </span>
@@ -157,7 +172,7 @@ export default function Timeline() {
             {timelineEvents.map((event: TimelineEvent, index: number) => (
               <motion.div
                 key={event.id}
-                className={`mb-12 flex flex-col md:flex-row ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
+                className={`mb-20 md:mb-24 flex flex-col md:flex-row ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -180,7 +195,7 @@ export default function Timeline() {
                 </div>
                 <div className="md:w-1/2 pt-4 md:pt-0 md:px-6">
                   <div
-                    className={`bg-white dark:bg-slate-950 p-6 rounded-xl shadow-md border-l-4 
+                    className={`bg-white dark:bg-slate-950 p-6 md:p-7 rounded-xl shadow-md border-l-4 
                     ${
                       event.category === "education"
                         ? "border-blue-500"

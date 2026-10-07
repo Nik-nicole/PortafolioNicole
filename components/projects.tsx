@@ -228,11 +228,11 @@ const baseProjects = [
     image: "/Skate1.png",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     gallery: [
-      "/Skate2.png",
+      "/skate2.png",
       "/Sakte3.png",
       "/Skate4.png",
       "/Skate5.png",
-      "SKATE6.png",
+      "/SKATE6.png",
     ],
     demo: "https://concaveskate.vercel.app/",
   },
